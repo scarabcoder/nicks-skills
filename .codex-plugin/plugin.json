@@ -1,0 +1,35 @@
+{
+  "name": "nicks-vibe-coding-skills",
+  "version": "0.1.0",
+  "description": "Reusable skills for building React TanStack Start + oRPC applications with Better Auth, Drizzle, Zod, CASL, MCP, TanStack Form, and Bun.",
+  "author": {
+    "name": "Nicholas Harris"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "tanstack-start",
+    "orpc",
+    "react",
+    "better-auth",
+    "drizzle",
+    "zod",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Vibe Coding Architecture Skills",
+    "shortDescription": "TanStack Start + oRPC app architecture skills.",
+    "longDescription": "A reusable skill pack for bootstrapping and extending full-stack React applications using TanStack Start, oRPC, Better Auth, Drizzle, Zod, CASL, MCP, TanStack Form, shadcn/Base UI, Tailwind v4, and Bun.",
+    "developerName": "Nicholas Harris",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Write",
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Bootstrap a TanStack Start + oRPC app.",
+      "Add a new domain module.",
+      "Design a Drizzle schema with Zod contracts."
+    ]
+  }
+}
