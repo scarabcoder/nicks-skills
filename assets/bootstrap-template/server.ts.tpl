@@ -1,5 +1,8 @@
 const port = Number(process.env.PORT || 3000);
-const handler = (await import('./dist/server/server.js')).default;
+const serverEntry = './dist/server/server.js';
+const { default: handler } = (await import(serverEntry)) as {
+  default: { fetch: (request: Request) => Response | Promise<Response> };
+};
 
 Bun.serve({
   port,
@@ -14,4 +17,3 @@ Bun.serve({
 });
 
 console.log(`Server listening on http://localhost:${port}`);
-

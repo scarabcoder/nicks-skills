@@ -64,8 +64,18 @@ the installed skill directory when creating a brand-new app:
 ```bash
 node .agents/skills/tanstack-start-orpc-architecture/scripts/bootstrap-tanstack-orpc-app.mjs \
   --target ./apps/workbench \
-  --config app.json
+  --app-name "Workbench" \
+  --package-name workbench \
+  --preset blank-local \
+  --install \
+  --verify
 ```
+
+Available presets:
+
+- `blank-local`: single tenant, PGlite, optional modules off
+- `workspace-local`: workspace tenancy, PGlite, audit logging
+- `platform-full`: workspace tenancy, PGlite, email, MCP, AI, and audit logging
 
 ## What It Includes
 

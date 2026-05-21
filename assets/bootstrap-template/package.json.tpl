@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "bunx --bun vite dev",
+    "dev:any-port": "DEV_PORT=auto bunx --bun vite dev --host 0.0.0.0",
     "build": "bunx --bun vite build",
     "start": "bun run server.ts",
+    "routes:generate": "bunx --bun tsr generate",
     "type-check": "tsc --noEmit --skipLibCheck",
     "lint": "bunx --bun oxlint src",
     "format": "oxfmt --write src",
@@ -64,7 +66,7 @@
     "drizzle-kit": "latest",
     "oxfmt": "latest",
     "oxlint": "latest",
+    "@tanstack/router-cli": "latest",
     "typescript": "latest"
   }
 }
-

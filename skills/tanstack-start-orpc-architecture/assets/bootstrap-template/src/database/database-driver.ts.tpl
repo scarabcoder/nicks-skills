@@ -15,7 +15,10 @@ export const databaseProvider = databaseUrl ? 'postgres' : 'pglite';
 
 function getGitBranch(): string {
   try {
-    return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
+    return execSync('git rev-parse --abbrev-ref HEAD', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
   } catch {
     return 'main';
   }

@@ -31,24 +31,28 @@ Only ask questions that cannot be answered from the repo. Minimum decisions:
 Use the bundled generator for new apps:
 
 ```bash
-node scripts/bootstrap-tanstack-orpc-app.mjs --target /path/to/app --config app.json --dry-run
-node scripts/bootstrap-tanstack-orpc-app.mjs --target /path/to/app --config app.json
+node scripts/bootstrap-tanstack-orpc-app.mjs \
+  --target blank-app \
+  --app-name "Blank App" \
+  --package-name blank-app \
+  --preset blank-local
 ```
 
-Config example:
+Presets:
 
-```json
-{
-  "appName": "Acme Workbench",
-  "packageName": "acme-workbench",
-  "baseUrl": "http://localhost:3000",
-  "enableWorkspaces": true,
-  "enableEmail": false,
-  "enableMcp": true,
-  "enableAi": false,
-  "enableAudit": true
-}
-```
+- `blank-local`: single tenant, PGlite, no email/MCP/AI/audit.
+- `workspace-local`: workspace tenancy, PGlite, audit.
+- `platform-full`: workspaces, PGlite, MCP, AI, email, audit.
+
+Default blank app assumptions:
+
+- target: `./blank-app` unless cwd is empty and app-like
+- app name: `Blank App`
+- base URL: `http://localhost:3000`
+- single tenant
+- PGlite fallback
+- optional modules off
+- run `--install --verify` unless blocked
 
 The generator writes a generic starter. After generation, layer in optional modules using the focused skills in this pack.
 
@@ -66,9 +70,11 @@ Run, as applicable:
 
 ```bash
 bun install
+bun run routes:generate
 bun run type-check
-bun run build
+bun run lint
 bun test
+bun run build
 ```
 
 If dependency installation is intentionally skipped, say so and validate with dry-run plus static inspection.

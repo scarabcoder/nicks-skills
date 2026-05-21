@@ -17,7 +17,44 @@ Build and extend full-stack React apps with the reusable architecture in this bu
 
 Do not carry source-project business concepts into the target project. Keep names generic unless the user supplies target-domain language.
 
+<!-- intent-skills:start -->
+## Skill Loading
+
+Before substantial work:
+- Skill check: run `pnpm dlx @tanstack/intent@latest list`, or use skills already listed in context.
+- Skill guidance: if one local skill clearly matches the task, run `pnpm dlx @tanstack/intent@latest load <package>#<skill>` and follow the returned `SKILL.md`.
+- Monorepos: when working across packages, run the skill check from the workspace root and prefer the local skill for the package being changed.
+- Multiple matches: prefer the most specific local skill for the package or concern you are changing; load additional skills only when the task spans multiple packages or concerns.
+<!-- intent-skills:end -->
+
 ## Bootstrap A New App
+
+### Default Blank App
+
+When the user says "initialize a blank app" or gives no stronger preferences,
+assume:
+
+- target: `./blank-app` unless the current directory is empty and already app-like
+- app name: `Blank App`
+- package name: `blank-app`
+- base URL: `http://localhost:3000`
+- preset: `blank-local`
+- single tenant
+- PGlite fallback
+- optional email/MCP/AI/audit modules off
+- run install and verification unless blocked by environment, time, or credentials
+
+Shortest path:
+
+```bash
+node <this-skill-dir>/scripts/bootstrap-tanstack-orpc-app.mjs \
+  --target ./blank-app \
+  --app-name "Blank App" \
+  --package-name blank-app \
+  --preset blank-local \
+  --install \
+  --verify
+```
 
 Ask only for decisions not discoverable from the target environment:
 
@@ -31,24 +68,21 @@ Ask only for decisions not discoverable from the target environment:
 Use the bundled generator:
 
 ```bash
-node <this-skill-dir>/scripts/bootstrap-tanstack-orpc-app.mjs --target /path/to/app --config app.json --dry-run
-node <this-skill-dir>/scripts/bootstrap-tanstack-orpc-app.mjs --target /path/to/app --config app.json
+node <this-skill-dir>/scripts/bootstrap-tanstack-orpc-app.mjs \
+  --target /path/to/app \
+  --app-name "Workspace App" \
+  --package-name workspace-app \
+  --preset workspace-local \
+  --dry-run
 ```
 
-Config example:
+Presets:
 
-```json
-{
-  "appName": "Acme Workbench",
-  "packageName": "acme-workbench",
-  "baseUrl": "http://localhost:3000",
-  "enableWorkspaces": true,
-  "enableEmail": false,
-  "enableMcp": true,
-  "enableAi": false,
-  "enableAudit": true
-}
-```
+- `blank-local`: single tenant, PGlite, optional modules off.
+- `workspace-local`: workspace tenancy, PGlite, audit on.
+- `platform-full`: workspace tenancy, PGlite, email, MCP, AI, and audit on.
+
+Use `--json` with `--dry-run` when another agent needs machine-readable output.
 
 Use latest-compatible dependency ranges in new apps unless the user explicitly asks for pinned versions.
 
@@ -131,12 +165,13 @@ Run what applies:
 
 ```bash
 bun install
+bun run routes:generate
 bun run type-check
-bun run build
+bun run lint
 bun test
+bun run build
 bun run drizzle:generate
 bun run drizzle:migrate
 ```
 
 If a command is skipped because it would install a fresh dependency tree or needs credentials, say so clearly.
-
