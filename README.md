@@ -4,10 +4,6 @@ Universal Agent Skill package for building React TanStack Start + oRPC applicati
 
 ## Install With Skills CLI
 
-The repo exposes one public skill: `tanstack-start-orpc-architecture`.
-Running `bunx skills add https://github.com/scarabcoder/nicks-skills` without
-`--skill` lists the available skill but does not install it.
-
 From a local checkout:
 
 ```bash
